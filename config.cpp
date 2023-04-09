@@ -44,6 +44,8 @@ class CfgEditorSubcategories
 		displayName = "Modular Warehouse";
 	};
 };
+
+class EventHandlers;
 class CfgVehicles
 {
 // Base classes - Do not modify
@@ -59,7 +61,7 @@ class CfgVehicles
 		scopeCurator = 0;
 		author = "Bromine";
 		editorCategory = "Bro_Objects";
-		editorPreview = "Bro_Modular_Warehouse\icon_ca.paa";		
+		editorPreview = "Bro_Modular_Warehouse\icon_ca.paa";
 		icon = "Bro_Modular_Warehouse\icon_ca.paa";
 		vehicleClass = "Structures";
 		editorSubcategory = "MWH";
@@ -67,6 +69,10 @@ class CfgVehicles
 		mapSize = 10;
 		keepHorizontalPlacement = 1;
 		numberOfDoors = 0;
+		class EventHandlers: EventHandlers {
+			dragged3DEN = "_this call compile preprocessFileLineNumbers 'Bro_Modular_Warehouse\snap.sqf';";
+			registeredToWorld3DEN = "_this call compile preprocessFileLineNumbers 'Bro_Modular_Warehouse\snap.sqf';";
+		};
 	};
 // Static - Walls
 	class Bro_MWH_Straight: Bro_MWH_Base
@@ -201,7 +207,7 @@ class CfgVehicles
 			};
 			class Door01_Close: Door01_Open
 			{
-			displayNameDefault="<img image='\A3\Ui_f\data\IGUI\Cfg\Actions\arrow_down_gs.paa' size='2' />";				
+			displayNameDefault="<img image='\A3\Ui_f\data\IGUI\Cfg\Actions\arrow_down_gs.paa' size='2' />";
 			displayName = "Close Garage";
 			condition = (this animationPhase 'Door04') >= 0.5;
 			statement = "([this, 'Door01'] call BIS_fnc_DoorNoHandleClose);([this, 'Door02'] call BIS_fnc_DoorNoHandleClose);([this, 'Door03'] call BIS_fnc_DoorNoHandleClose);([this, 'Door04'] call BIS_fnc_DoorNoHandleClose);";
