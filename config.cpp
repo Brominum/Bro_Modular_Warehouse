@@ -6,6 +6,8 @@ class CfgPatches
 		requiredVersion = 0.1;
 		units[] =
 		{
+			"Bro_MWH_Pole",
+			"Bro_MWH_Roof_Inner",
 			"Bro_MWH_Straight",
 			"Bro_MWH_Window",
 			"Bro_MWH_Corner",
@@ -77,7 +79,7 @@ class CfgVehicles
 // Static - Walls
 	class Bro_MWH_Straight: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Wall (Plain)";
+		displayName = "Green Wall (Plain)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Straight.p3d";
@@ -85,7 +87,7 @@ class CfgVehicles
 	};
 	class Bro_MWH_Window: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Wall (Window)";
+		displayName = "Green Wall (Window)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Window.p3d";
@@ -93,17 +95,24 @@ class CfgVehicles
 	};
 	class Bro_MWH_Corner: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Wall (Corner)";
+		displayName = "Green Wall (Corner)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Corner.p3d";
 		editorPreview = "Bro_Modular_Warehouse\previews\Bro_MWH_Corner.jpg";
 	};
+	class Bro_MWH_Pole: Bro_MWH_Base
+	{
+		displayName = "Support/Corner Beam";
+		scope = 2;
+		scopeCurator = 2;
+		model = "Bro_Modular_Warehouse\Bro_MWH_Pole.p3d";
+	};
 
 // Static - Roofs
 	class Bro_MWH_Roof_Edge: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Roof (Edge)";
+		displayName = "Green Roof (Edge)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Roof_Edge.p3d";
@@ -111,7 +120,7 @@ class CfgVehicles
 	};
 	class Bro_MWH_Roof_Corner: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Roof (Corner)";
+		displayName = "Green Roof (Corner)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Roof_Corner.p3d";
@@ -119,17 +128,34 @@ class CfgVehicles
 	};
 	class Bro_MWH_Roof_Middle: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Roof (Middle)";
+		displayName = "Green Roof (Middle)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Roof_Middle.p3d";
 		editorPreview = "Bro_Modular_Warehouse\previews\Bro_MWH_Roof_Middle.jpg";
 	};
+// Inner Corners and compatibility parts don't work because I'm a silly little guy. I'll fix them eventually.
+/*
+	class Bro_MWH_Roof_Inner: Bro_MWH_Base
+	{
+		displayName = "Green Roof (Inside Corner)";
+		scope = 2;
+		scopeCurator = 2;
+		model = "Bro_Modular_Warehouse\Bro_MWH_Roof_Inner.p3d";
+	};
+	class Bro_MWH_Roof_Half: Bro_MWH_Base
+	{
+		displayName = "Green Roof (Half-Width)";
+		scope = 2;
+		scopeCurator = 2;
+		model = "Bro_Modular_Warehouse\Bro_MWH_Roof_Half.p3d";
+	};
+*/
 
 // Animated
 	class Bro_MWH_Door: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Wall (Door)";
+		displayName = "Green Wall (Door)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Door.p3d";
@@ -166,7 +192,7 @@ class CfgVehicles
 	};
 	class Bro_MWH_Garage: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Wall (Garage)";
+		displayName = "Green Wall (Garage)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Garage.p3d";
@@ -216,7 +242,7 @@ class CfgVehicles
 	};
 	class Bro_MWH_Vents: Bro_MWH_Base
 	{
-		displayName = "Green Warehouse Wall (Vents)";
+		displayName = "Green Wall (Vents)";
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Vents.p3d";
@@ -239,47 +265,63 @@ class CfgVehicles
 // Tan variants
 	class Bro_MWH_Straight_Tan: Bro_MWH_Straight
 	{
-		displayName = "Tan Warehouse Wall (Plain)";
+		displayName = "Tan Wall (Plain)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Straight_Tan.p3d";
 	};
 	class Bro_MWH_Window_Tan: Bro_MWH_Window
 	{
-		displayName = "Tan Warehouse Wall (Window)";
+		displayName = "Tan Wall (Window)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Window_Tan.p3d";
 	};
 	class Bro_MWH_Corner_Tan: Bro_MWH_Corner
 	{
-		displayName = "Tan Warehouse Wall (Corner)";
+		displayName = "Tan Wall (Corner)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Corner_Tan.p3d";
 	};
 	class Bro_MWH_Roof_Edge_Tan: Bro_MWH_Roof_Edge
 	{
-		displayName = "Tan Warehouse Roof (Edge)";
+		displayName = "Tan Roof (Edge)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Roof_Edge_Tan.p3d";
 	};
 	class Bro_MWH_Roof_Corner_Tan: Bro_MWH_Roof_Corner
 	{
-		displayName = "Tan Warehouse Roof (Corner)";
+		displayName = "Tan Roof (Corner)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Roof_Corner_Tan.p3d";
 	};
 	class Bro_MWH_Roof_Middle_Tan: Bro_MWH_Roof_Middle
 	{
-		displayName = "Tan Warehouse Roof (Middle)";
+		displayName = "Tan Roof (Middle)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Roof_Middle_Tan.p3d";
 	};
 	class Bro_MWH_Door_Tan: Bro_MWH_Door
 	{
-		displayName = "Tan Warehouse Wall (Door)";
+		displayName = "Tan Wall (Door)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Door_Tan.p3d";
 	};
 	class Bro_MWH_Garage_Tan: Bro_MWH_Garage
 	{
-		displayName = "Tan Warehouse Wall (Garage)";
+		displayName = "Tan Wall (Garage)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Garage_Tan.p3d";
 	};
 	class Bro_MWH_Vents_Tan: Bro_MWH_Vents
 	{
-		displayName = "Tan Warehouse Wall (Vents)";
+		displayName = "Tan Wall (Vents)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Vents_Tan.p3d";
 	};
+/*
+	class Bro_MWH_Roof_Inner_Tan: Bro_MWH_Roof_Inner
+	{
+		displayName = "Tan Roof (Inside Corner)";
+		scope = 2;
+		scopeCurator = 2;
+		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Roof_Inner_Tan.p3d";
+	};
+	class Bro_MWH_Roof_Half_Tan: Bro_MWH_Roof_Half
+	{
+		displayName = "Tan Roof (Half-Width)";
+		scope = 2;
+		scopeCurator = 2;
+		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Roof_Half_Tan.p3d";
+	};
+*/
 };
