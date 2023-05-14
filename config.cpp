@@ -107,6 +107,7 @@ class CfgVehicles
 		scope = 2;
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Pole.p3d";
+		editorPreview = "Bro_Modular_Warehouse\previews\Bro_Pole.jpg";
 	};
 
 // Static - Roofs
