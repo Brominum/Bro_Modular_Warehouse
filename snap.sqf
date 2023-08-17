@@ -7,7 +7,7 @@ params["_object"];
 //systemChat str _this;
 // If there is another cargo platform nearby then try to snap to it
 // First we have to wait till dragging is completed
-if (current3DENOperation != "") exitWith {};
+if ((is3DEN && {current3DENOperation != "" || {get3DENActionState "MoveGridToggle" == 0}})) exitWith {};
 
 private _nearbyObjects = nearestObjects [_object, ["Bro_MWH_Base"], 13];
 _nearbyObjects = _nearbyObjects - [_object];
