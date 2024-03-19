@@ -60,7 +60,7 @@ class Stage4
 };
 class Stage5
 {
-	texture="#(argb,8,8,3)color(1,0,1,0,SMDI)";
+	texture="Bro_Modular_Warehouse\data\Wall_Internal_SMDI.paa";
 	uvSource="tex";
 	class uvTransform
 	{
