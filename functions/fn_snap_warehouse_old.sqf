@@ -1,63 +1,69 @@
 /*
-	fn_snap.sqf
-
-	Snap a modular object to nearby compatible objects via Memory LOD snap points.
-	Named selections expected in Memory LOD: snap_1 through snap_4 (gaps allowed).
-
+	fn_snap_warehouse_old.sqf
+	Snap a modular warehouse wall or roof (Bro_MWH_Base) to a near compatible object with the snap points of its model.
+	Named selections: snap_1 to snap_8 (gaps are permitted). Each snap selection must contain only one vertex.
 	Parameters:
-		0: OBJECT - the object being moved/placed
+		0: OBJECT - the object that the user moved or placed
 */
 params [["_object", objNull]];
-
-// Skip during active 3DEN drag operations
+if (isNull _object) exitWith {};
+// Do not snap while an Eden operation is active or when grid snap is off
 if (is3DEN && {current3DENOperation != "" || {get3DENActionState "MoveGridToggle" == 0}}) exitWith {};
-
-// Skip when multiple objects are selected to prevent group moves destroying layouts
+// Do not snap when more than one object is selected. This prevents damage to the layout during a group move.
 if (count (get3DENSelected "Object") > 1) exitWith {};
-
-private _nearbyObjects = nearestObjects [_object, ["Bro_MWH_Base"], 13] - [_object];
+// Maximum horizontal distance between two snap points that can connect
+private _tolXY = 1.0;
+// Maximum vertical distance between two snap points that can connect
+// Keep this value less than the height of one wall (10 m), so that a roof piece does not snap to a wall
+private _tolZ = 1.0;
+// Search radius: from the object center to its farthest snap point (roof piece corner: 7.1 m), plus the same for the other object, plus the tolerance
+private _nearbyObjects = (nearestObjects [_object, ["Bro_MWH_Base"], 16]) - [_object];
 if (_nearbyObjects isEqualTo []) exitWith {};
-
-// Collect this object's snap point world positions
-// selectionPosition returns [0,0,0] for missing selections - filter those out
-private _mySnapPoints = [];
-for "_i" from 1 to 4 do {
-	private _selPos = _object selectionPosition format ["snap_%1", _i];
-	if !(_selPos isEqualTo [0,0,0]) then {
-		_mySnapPoints pushBack (_object modelToWorldVisual _selPos);
-	};
-};
-if (_mySnapPoints isEqualTo []) exitWith {};
-
-// Search all nearby objects for the closest matching snap point pair
-private _bestDist = 1.0;
-private _bestMyPoint = [];
-private _bestTheirPoint = [];
-private _bestObject = objNull;
-
-{
-	private _other = _x;
-	for "_i" from 1 to 4 do {
-		private _theirSelPos = _other selectionPosition format ["snap_%1", _i];
-		if !(_theirSelPos isEqualTo [0,0,0]) then {
-			private _theirWorldPos = _other modelToWorldVisual _theirSelPos;
-			{
-				private _dist = _x distance _theirWorldPos;
-				if (_dist < _bestDist) then {
-					_bestDist = _dist;
-					_bestMyPoint = _x;
-					_bestTheirPoint = _theirWorldPos;
-					_bestObject = _other;
-				};
-			} forEach _mySnapPoints;
+// Get the snap points of an object in model space
+// selectionPosition gives [0,0,0] for a selection that does not exist
+private _fnc_snapPoints = {
+	private _points = [];
+	for "_i" from 1 to 8 do {
+		private _pos = _this selectionPosition format ["snap_%1", _i];
+		if !(_pos isEqualTo [0,0,0]) then {
+			_points pushBack _pos;
 		};
 	};
+	_points
+};
+// Turn a model space vector around the Z axis into world space for a given direction (degrees, clockwise from north)
+private _fnc_rotate = {
+	params ["_v", "_dir"];
+	_v params ["_vx", "_vy", "_vz"];
+	[_vx * cos _dir + _vy * sin _dir, _vy * cos _dir - _vx * sin _dir, _vz]
+};
+private _myPoints = _object call _fnc_snapPoints;
+if (_myPoints isEqualTo []) exitWith {};
+// Find the nearest pair of snap points in world space (ASL)
+// A pair is a candidate only if it is in the horizontal and vertical limits
+private _bestDist = 1e10;
+private _bestMyModel = [];
+private _bestTheirWorld = [];
+private _bestObject = objNull;
+{
+	private _other = _x;
+	{
+		private _theirWorld = _other modelToWorldWorld _x;
+		{
+			private _myWorld = _object modelToWorldWorld _x;
+			private _dist = _myWorld distance _theirWorld;
+			if (_myWorld distance2D _theirWorld < _tolXY && {abs ((_myWorld # 2) - (_theirWorld # 2)) < _tolZ} && {_dist < _bestDist}) then {
+				_bestDist = _dist;
+				_bestMyModel = _x;
+				_bestTheirWorld = _theirWorld;
+				_bestObject = _other;
+			};
+		} forEach _myPoints;
+	} forEach (_other call _fnc_snapPoints);
 } forEach _nearbyObjects;
-
 if (isNull _bestObject) exitWith {};
-
-// Find the closest 90-degree rotation increment relative to the target object
-// Uses modular arithmetic to correctly handle the 0/360 degree boundary
+// Find the 90 degree step of the target direction that is nearest to the current direction
+// The modulo operation correctly handles the 0/360 degree boundary
 private _dirTarget = getDir _bestObject;
 private _dirCurrent = getDir _object;
 private _bestDir = _dirTarget;
@@ -70,20 +76,11 @@ for "_j" from 0 to 3 do {
 		_bestDir = _candidate;
 	};
 };
-
-// Save snap point in model space before rotation is applied
-// After set3DENAttribute the world transform changes, so model space is stable
-private _snapPosModel = _object worldToModel _bestMyPoint;
-
-_object set3DENAttribute ["rotation", [0, 0, _bestDir]];
-
-// Recalculate where that model-space point now sits in world space post-rotation
-private _snapPosWorld = _object modelToWorldVisual _snapPosModel;
-
-// Shift the object so our snap point coincides with theirs
-private _newPosASL = (getPosASL _object) vectorAdd (_bestTheirPoint vectorDiff _snapPosWorld);
-
-// Lock Z to the target object's altitude for flush/level placement
-_newPosASL set [2, (getPosASL _bestObject) # 2];
-
+// Calculate the new position from the model data. Do not read the position again after the rotation changes.
+// The model origin must be at the target snap point minus our snap point turned to the new direction
+private _newPosWorld = _bestTheirWorld vectorDiff ([_bestMyModel, _bestDir] call _fnc_rotate);
+// getPosASL is not the model origin. Keep its offset from the origin in model space, then turn it to the new direction.
+private _aslOffset = [(getPosASL _object) vectorDiff (getPosWorld _object), -_dirCurrent] call _fnc_rotate;
+private _newPosASL = _newPosWorld vectorAdd ([_aslOffset, _bestDir] call _fnc_rotate);
+_object set3DENAttribute ["rotation", [0, 0, _bestDir % 360]];
 _object set3DENAttribute ["position", ASLToATL _newPosASL];

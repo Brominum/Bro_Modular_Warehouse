@@ -27,9 +27,9 @@ class CfgFunctions  {
 };
 class CfgVehicles {
 // Base classes - Do not modify
-	class HouseBase;
+	class House;
 	class Ruins_F;
-	class House_f : HouseBase {
+	class House_F: House {
 		class DestructionEffects;
 		class EventHandlers;
 	};
