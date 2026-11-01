@@ -50,6 +50,9 @@ class CfgVehicles {
 			dragged3DEN = "_this call bro_fnc_snap_warehouse_old;";
 			registeredToWorld3DEN = "_this call bro_fnc_snap_warehouse_old;";
 		};
+		// Extra snap points for fn_snap_warehouse_old: {selection, x, y, z}, an offset from the selection in model space (z is up)
+		// The default is for the 10 m walls: one point on the top of each end, where a roof piece sits
+		bro_mwh_extraSnaps[] = {{"snap_1", 0, 0, 10}, {"snap_2", 0, 0, 10}};
 	};
 // Static - Walls
 	class Land_Bro_MWH_Straight: Bro_MWH_Base {
@@ -72,6 +75,8 @@ class CfgVehicles {
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Corner.p3d";
 		editorPreview = "Bro_Modular_Warehouse\previews\Bro_MWH_Corner.jpg";
+		// The top of both ends and the top of the corner itself (5 m from snap_1)
+		bro_mwh_extraSnaps[] = {{"snap_1", 0, 0, 10}, {"snap_2", 0, 0, 10}, {"snap_1", -5, 0, 10}};
 	};
 	class Land_Bro_MWH_Pole: Bro_MWH_Base {
 		displayName = "Support/Corner Beam";
@@ -79,6 +84,7 @@ class CfgVehicles {
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Pole.p3d";
 		editorPreview = "Bro_Modular_Warehouse\previews\Bro_Pole.jpg";
+		bro_mwh_extraSnaps[] = {{"snap_1", 0, 0, 10}};
 	};
 // Static - Roofs
 	class Land_Bro_MWH_Roof_Edge: Bro_MWH_Base {
@@ -87,6 +93,8 @@ class CfgVehicles {
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Roof_Edge.p3d";
 		editorPreview = "Bro_Modular_Warehouse\previews\Bro_MWH_Roof_edge.jpg";
+		// The two ends of the wall line under the roof edge: 5 m to the outside of the snap points and 2.9 m down, on the wall top
+		bro_mwh_extraSnaps[] = {{"snap_1", 0, -5, -2.9}, {"snap_2", 0, -5, -2.9}};
 	};
 	class Land_Bro_MWH_Roof_Corner: Bro_MWH_Base {
 		displayName = "Green Roof (Corner)";
@@ -94,6 +102,8 @@ class CfgVehicles {
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Roof_Corner.p3d";
 		editorPreview = "Bro_Modular_Warehouse\previews\Bro_MWH_Roof_Corner.jpg";
+		// The outer corner and the two arm ends of the corner wall under the roof corner, on the wall top
+		bro_mwh_extraSnaps[] = {{"snap_1", -5, -5, -2.9}, {"snap_1", 0, -5, -2.9}, {"snap_1", -5, 0, -2.9}};
 	};
 	class Land_Bro_MWH_Roof_Middle: Bro_MWH_Base {
 		displayName = "Green Roof (Middle)";
@@ -101,6 +111,8 @@ class CfgVehicles {
 		scopeCurator = 2;
 		model = "Bro_Modular_Warehouse\Bro_MWH_Roof_Middle.p3d";
 		editorPreview = "Bro_Modular_Warehouse\previews\Bro_MWH_Roof_Middle.jpg";
+		// The middle roof does not touch a wall
+		bro_mwh_extraSnaps[] = {};
 	};
 // Animated
 	class Land_Bro_MWH_Door: Bro_MWH_Base {

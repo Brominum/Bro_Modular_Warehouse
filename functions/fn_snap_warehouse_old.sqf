@@ -14,7 +14,7 @@ if (count (get3DENSelected "Object") > 1) exitWith {};
 // Maximum horizontal distance between two snap points that can connect
 private _tolXY = 1.0;
 // Maximum vertical distance between two snap points that can connect
-// Keep this value less than the height of one wall (10 m), so that a roof piece does not snap to a wall
+// Keep this value less than the height of one wall (10 m). Roofs connect to walls only through the extra snap points on the wall tops.
 private _tolZ = 1.0;
 // Search radius: from the object center to its farthest snap point (roof piece corner: 7.1 m), plus the same for the other object, plus the tolerance
 private _nearbyObjects = (nearestObjects [_object, ["Bro_MWH_Base"], 16]) - [_object];
@@ -29,6 +29,15 @@ private _fnc_snapPoints = {
 			_points pushBack _pos;
 		};
 	};
+	// Extra snap points from config: {selection, x, y, z}. Each point is the selection position plus the offset (model space, z is up).
+	// The walls get points on their top edge and the roof pieces get points where they sit on a wall, so that a roof can snap to the walls below it.
+	{
+		_x params ["_sel", "_dx", "_dy", "_dz"];
+		private _pos = _this selectionPosition _sel;
+		if !(_pos isEqualTo [0,0,0]) then {
+			_points pushBack (_pos vectorAdd [_dx, _dy, _dz]);
+		};
+	} forEach getArray (configOf _this >> "bro_mwh_extraSnaps");
 	_points
 };
 // Turn a model space vector around the Z axis into world space for a given direction (degrees, clockwise from north)
