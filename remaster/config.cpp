@@ -145,21 +145,29 @@ class CfgVehicles {
 		editorPreview = "Bro_Modular_Warehouse\remaster\thumbs\Land_Bro_MWHR_Plain.jpg";
 	};
 	class Land_Bro_MWHR_Plaint_Int: Land_Bro_MWHR_Plain {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "WH Wall: Plain, Interior";
 		model = "Bro_Modular_Warehouse\remaster\bro_mwhr_plain_int.p3d";
 		editorPreview = "Bro_Modular_Warehouse\remaster\thumbs\Land_Bro_MWHR_Plain.jpg";
 	};
 	class Land_Bro_MWHR_Corner: Land_Bro_MWHR_Plain {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "WH Wall: Corner Endcap";
 		model = "Bro_Modular_Warehouse\remaster\bro_mwhr_corner.p3d";
 		editorPreview = "Bro_Modular_Warehouse\remaster\thumbs\Land_Bro_MWHR_Corner.jpg";
 	};
 	class Land_Bro_MWHR_Window: Land_Bro_MWHR_Plain {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "WH Wall: Window";
 		model = "Bro_Modular_Warehouse\remaster\bro_mwhr_window.p3d";
 		editorPreview = "Bro_Modular_Warehouse\remaster\thumbs\Land_Bro_MWHR_Window.jpg";
 	};
 	class Land_Bro_MWHR_Door: Land_Bro_MWHR_Plain {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "WH Wall: Door";
 		model = "Bro_Modular_Warehouse\remaster\bro_mwhr_door.p3d";
 		editorPreview = "Bro_Modular_Warehouse\remaster\thumbs\Land_Bro_MWHR_Door.jpg";
@@ -196,6 +204,8 @@ class CfgVehicles {
 		};
 	};
 	class Land_Bro_MWHR_Garage: Land_Bro_MWHR_Plain {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "WH Wall: Garage";
 		model = "Bro_Modular_Warehouse\remaster\bro_mwhr_garage.p3d";
 		editorPreview = "Bro_Modular_Warehouse\remaster\thumbs\Land_Bro_MWHR_Garage.jpg";
@@ -234,12 +244,16 @@ class CfgVehicles {
 		};
 	};
 	class Land_Bro_MWHR_Roof: Land_Bro_MWHR_Plain {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "WH Ceiling";
 		editorSubcategory = "Bro_MWHR_Roof";
 		model = "Bro_Modular_Warehouse\remaster\bro_mwhr_roof.p3d";
 		editorPreview = "a3\structures_f_exp\infrastructure\airports\data\airport_02_hangar_metal_03_co.paa";
 	};
 	class Land_Bro_MWHR_Floor: Land_Bro_MWHR_Plain {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "WH Floor";
 		editorSubcategory = "Bro_MWHR_Floor";
 		model = "Bro_Modular_Warehouse\remaster\bro_mwhr_floor.p3d";

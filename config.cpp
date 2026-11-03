@@ -212,46 +212,64 @@ class CfgVehicles {
 	};
 // Tan variants
 	class Land_Bro_MWH_Straight_Tan: Land_Bro_MWH_Straight {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Wall (Plain)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Straight_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
 	};
 	class Land_Bro_MWH_Window_Tan: Land_Bro_MWH_Window {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Wall (Window)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Window_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
 	};
 	class Land_Bro_MWH_Corner_Tan: Land_Bro_MWH_Corner {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Wall (Corner)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Corner_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
 	};
 	class Land_Bro_MWH_Roof_Edge_Tan: Land_Bro_MWH_Roof_Edge {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Roof (Edge)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Roof_Edge_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
 	};
 	class Land_Bro_MWH_Roof_Corner_Tan: Land_Bro_MWH_Roof_Corner {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Roof (Corner)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Roof_Corner_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
 	};
 	class Land_Bro_MWH_Roof_Middle_Tan: Land_Bro_MWH_Roof_Middle {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Roof (Middle)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Roof_Middle_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
 	};
 	class Land_Bro_MWH_Door_Tan: Land_Bro_MWH_Door {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Wall (Door)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Door_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
 	};
 	class Land_Bro_MWH_Garage_Tan: Land_Bro_MWH_Garage {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Wall (Garage)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Garage_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
 	};
 	class Land_Bro_MWH_Vents_Tan: Land_Bro_MWH_Vents {
+		scope = 2;
+		scopeCurator = 2;
 		displayName = "Tan Wall (Vents)";
 		model = "Bro_Modular_Warehouse\data\tan\Bro_MWH_Vents_Tan.p3d";
 		editorSubcategory = "MWH_Tan";
